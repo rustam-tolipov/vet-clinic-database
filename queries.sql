@@ -8,4 +8,75 @@ SELECT name, escape_attempts FROM animals WHERE weight_kg > 10.5;
 SELECT * FROM animals WHERE neutered = 'yes';
 SELECT * FROM animals WHERE name != 'Gabumon';
 SELECT * FROM animals WHERE weight_kg BETWEEN 10.4 AND 17.3;
-SELECT * FROM animals WHERE weight_kg BETWEEN 10.4 AND 17.3;
+
+ALTER TABLE animals ADD species varchar(255);
+
+  SELECT * FROM animals;
+
+BEGIN TRANSACTION;
+ 
+  UPDATE animals SET species = 'unspecified';
+
+  SELECT * FROM animals;
+ 
+ROLLBACK TRANSACTION;
+
+  SELECT * FROM animals;
+
+BEGIN TRANSACTION;
+
+  UPDATE animals SET species = 'digimon' WHERE name LIKE '%mon';
+
+  UPDATE animals SET species = 'pokemon' WHERE name NOT LIKE '%mon';
+
+COMMIT TRANSACTION;
+
+  SELECT * FROM animals;
+
+BEGIN TRANSACTION;
+
+  DELETE FROM animals ;
+
+  SELECT * FROM animals;
+
+ROLLBACK TRANSACTION;
+
+  SELECT * FROM animals;
+
+BEGIN TRANSACTION;
+
+  DELETE FROM animals WHERE date_of_birth > '2022-01-01';
+
+  SAVEPOINT transaction;
+
+  UPDATE animals SET weight_kg = weight_kg * -1;
+
+  SELECT * FROM animals;
+
+ROLLBACK TRANSACTION TO SAVEPOINT transaction;
+
+  SELECT * FROM animals;
+
+  UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
+
+  SELECT * FROM animals;
+
+COMMIT TRANSACTION;
+
+-- How many animals are there?
+SELECT COUNT(*) AS count_of_animals FROM animals;
+
+-- How many animals have never tried to escape?
+SELECT COUNT(*) AS count_of_not_escapeds FROM animals WHERE escape_attempts < 1;
+
+-- What is the average weight of animals?
+SELECT ROUND(AVG(weight_kg)) AS AVG FROM animals;
+
+-- Who escapes the most, neutered or not neutered animals?
+SELECT MAX(sum),neutered FROM( SELECT SUM(escape_attempts),neutered FROM animals GROUP BY neutered ) as max GROUP BY neutered;
+
+-- What is the minimum and maximum weight of each type of animal?
+SELECT species, MIN(weight_kg), MAX(weight_kg) FROM animals GROUP BY species;
+
+-- What is the average number of escape attempts per animal type of those born between 1990 and 2000?
+SELECT species, ROUND(AVG(escape_attempts)) AS AVG FROM animals WHERE date_of_birth BETWEEN '01-01-1990' AND '01-01-2000' GROUP BY species;
