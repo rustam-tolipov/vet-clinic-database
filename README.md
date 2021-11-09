@@ -3,6 +3,9 @@
 > This template should be used for database related projects at Microverse.
 > Generate your own repository, update this README and edit all files content while working on projects. You should not be adding any new files unless asked otherwise.
 
+## Schema database
+
+![drawSQL-export-2021-11-09_17_44](https://user-images.githubusercontent.com/69011963/140926752-11e57128-d913-4b0e-896b-2e5abbfddab2.png)
 
 ## Getting Started
 
@@ -20,7 +23,7 @@ This repository includes files with plain SQL that can be used to recreate a dat
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/rustamjon-tolipov/)
 
 ## 🤝 Contributing
-
+drawSQL-export-2021-11-09_17_44
 Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](https://github.com/Rustamxon7/Vet-clinic-database/issues).
